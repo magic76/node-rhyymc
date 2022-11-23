@@ -1,0 +1,25 @@
+{
+  "name": "node-starter",
+  "version": "0.0.0",
+  "type": "module",
+  "jest": {
+    "verbose": true,
+    "testMatch": [
+      "**/__tests__/**/*.+(ts|tsx|js)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    }
+  },
+  "scripts": {
+    "jest:watch": "npx jest --watchAll"
+  },
+  "dependencies": {
+    "@types/jest": "^27.0.2",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.3.1",
+    "typescript": "^4.4.4"
+  }
+}
