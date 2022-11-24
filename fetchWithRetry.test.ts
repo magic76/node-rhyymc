@@ -60,13 +60,32 @@ describe('api retry method', () => {
         }
         return callApiTimeoutFail();
       },
-      1000,
+      100,
       2
     );
 
     expect(apiCallTimes).toBe(2);
     expect(res.success).toBe(true);
   });
+
+  it('should call retry callback when retry count over', async () => {
+    let apiCallTimes = 0;
+    let reachLimit = false;
+    const res = await fetchWithRetry(
+      () => {
+        apiCallTimes++;
+        return callApiTimeoutFail();
+      },
+      100,
+      2,
+      () => {
+        reachLimit = true;
+      }
+    );
+    expect(apiCallTimes).toBe(3);
+    expect(reachLimit).toBe(true);
+  });
+
   it('should return api success without retry', async () => {
     let apiCallTimes = 0;
     const res = await fetchWithRetry(
@@ -77,7 +96,7 @@ describe('api retry method', () => {
         }
         return callApiTimeoutFail();
       },
-      1000,
+      100,
       2
     );
 
